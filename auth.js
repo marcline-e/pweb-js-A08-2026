@@ -16,6 +16,17 @@ document.addEventListener("DOMContentLoaded", () => {
         welcomeElement.textContent = `Welcome, ${firstName}!`;
     }
     
+    if (!localStorage.getItem('firstName')) {
+        window.location.replace('login.html');
+    }
+
+    // Jaga-jaga kalau halaman ini muncul lagi dari bfcache (back/forward)
+    window.addEventListener('pageshow', () => {
+        if (!localStorage.getItem('firstName')) {
+            window.location.replace('login.html');
+        }
+    });
+
     // 4. Logout: Hapus sesi dari Local Storage dan balik ke login[cite: 1]
     const logoutBtn = document.getElementById('logoutBtn');
     if (logoutBtn) {
