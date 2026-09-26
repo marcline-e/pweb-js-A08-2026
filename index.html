@@ -1,14 +1,46 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+
+    <title>Mini Shopee</title>
+
+    <link rel="stylesheet" href="catalog.css">
+
     <script src="auth.js" defer></script>
+    <script src="catalog.js" defer></script>
 </head>
+
 <body>
-    <h2>Bismillah</h2>
-    <button id="logoutBtn">Coba logout</button>
+
+    <!-- Navbar -->
+    <nav>
+        <h2>Mini Shopee</h2>
+
+        <p id="welcomeMsg"></p>
+
+        <button id="logoutBtn">Logout</button>
+
+        <p>Bismillah</p>
+    </nav>
+
+    <!-- Katalog -->
+    <main>
+        <h1>Product Catalog</h1>
+
+        <div id="productContainer"></div>
+
+        <p id="errorMsg"></p>
+
+        <button id="loadMoreBtn">Load More</button>
+    </main>
+
+    <!-- Modal Detail -->
+    <div id="productModal" class="modal">
+        <div id="modalContent"></div>
+    </div>
+
 </body>
 </html>
-
