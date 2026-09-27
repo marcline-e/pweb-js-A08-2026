@@ -1,14 +1,80 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Mini Shopee - Katalog Produk</title>
+    <link rel="stylesheet" href="style.css">
     <script src="auth.js" defer></script>
+    <script src="app.js" defer></script>
 </head>
 <body>
-    <h2>Bismillah</h2>
-    <button id="logoutBtn">Coba logout</button>
+    <div class="app-container">
+        <!-- Header & Navigasi -->
+        <header>
+            <button id="logoutBtn" class="nav-btn">Logout</button>
+            <h2 id="welcomeMsg" class="welcome-text">Welcome!</h2>
+            <div class="cart-header">
+                <button id="cartToggleBtn" class="cart-btn">
+                    🧺 KERANJANG <span id="cartBadge" class="badge">0</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Filter & Search Section -->
+        <section class="controls-section">
+            <div class="input-group search-group">
+                <label for="searchInput">Cari Produk</label>
+                <input type="text" id="searchInput" placeholder="Cari berdasarkan nama atau kategori...">
+            </div>
+
+            <div class="input-group">
+                <label for="categoryFilter">Kategori</label>
+                <select id="categoryFilter">
+                    <option value="all">Semua Kategori</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label for="sortBy">Urutkan Berdasarkan</label>
+                <select id="sortBy">
+                    <option value="default">Default</option>
+                    <option value="price-asc">Termurah</option>
+                    <option value="price-desc">Termahal</option>
+                    <option value="rating-desc">Rating Tertinggi</option>
+                </select>
+            </div>
+        </section>
+
+        <!-- Keranjang Belanja -->
+        <section id="cartSection" class="cart-section hidden">
+            <h3>Keranjang Belanja Anda</h3>
+            <div id="cartItemsList" class="cart-items-list"></div>
+            <div class="cart-summary">
+                <h4>Total: $<span id="cartTotal">0</span></h4>
+                <button id="clearCartBtn" class="danger-btn">Kosongkan Keranjang</button>
+            </div>
+        </section>
+
+        <!-- Container Error Global -->
+        <div id="errorContainer" class="error-container hidden"></div>
+
+        <!-- Catalog Grid -->
+        <main>
+            <div id="productList" class="product-grid"></div>
+            
+            <div class="load-more-container">
+                <button id="loadMoreBtn" class="hidden">Muat Lebih Banyak</button>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal Detail Produk -->
+    <div id="productModal" class="modal hidden">
+        <div class="modal-content">
+            <span id="closeModalBtn" class="close-btn">&times;</span>
+            <div id="modalBody" class="modal-body"></div>
+        </div>
+    </div>
 </body>
 </html>
-

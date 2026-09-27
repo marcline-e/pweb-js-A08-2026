@@ -1,27 +1,31 @@
 @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700&family=Space+Mono:wght@400;700&display=swap');
 
 :root {
-  --bg-color: #F8F5EE; /* Krem/Off-white ala Aura Bora */
-  --text-dark: #204130; /* Hijau tua/Forest green */
-  --primary-btn: #F06A33; /* Oranye Terakota */
+  --bg-color: #F8F5EE;
+  --text-dark: #204130;
+  --primary-btn: #F06A33;
   --primary-btn-hover: #D75520;
   --input-bg: #FFFFFF;
   --border-color: #204130;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
-  padding: 0;
+  padding: 20px;
   background-color: var(--bg-color);
   font-family: 'Space Mono', monospace;
   color: var(--text-dark);
   display: flex;
   justify-content: center;
-  align-items: center;
-  height: 100vh;
+  align-items: flex-start;
+  min-height: 100vh;
 }
 
-/* Card Container ala Kemasan/Stiker */
+/* Login Container */
 .login-container {
   background-color: var(--bg-color);
   border: 3px solid var(--border-color);
@@ -31,26 +35,23 @@ body {
   max-width: 400px;
   box-shadow: 8px 8px 0px var(--border-color); 
   text-align: center;
+  margin: auto;
 }
 
-/* Tipografi Judul Playful */
 .login-container h2 {
   font-family: 'Fraunces', serif;
-  font-size: 2.5rem;
+  font-size: 2.2rem;
   margin-top: 0;
   margin-bottom: 10px;
-  color: var(--text-dark);
-  letter-spacing: -1px;
 }
 
 .login-container p {
   font-size: 0.9rem;
   margin-bottom: 30px;
-  color: var(--text-dark);
   font-weight: 700;
 }
 
-/* Styling Input Form */
+/* Input Group */
 .input-group {
   text-align: left;
   margin-bottom: 20px;
@@ -64,40 +65,33 @@ body {
   text-transform: uppercase;
 }
 
-.input-group input {
+.input-group input,
+.input-group select {
   width: 100%;
   padding: 12px;
   border: 2px solid var(--border-color);
   border-radius: 12px;
   font-family: 'Space Mono', monospace;
   font-size: 1rem;
-  box-sizing: border-box;
   background-color: var(--input-bg);
   outline: none;
-  transition: box-shadow 0.2s ease, transform 0.2s ease;
 }
 
-.input-group input:focus {
-  box-shadow: 4px 4px 0px var(--border-color);
-  transform: translate(-2px, -2px);
-}
-
-/* Styling Tombol Bold berbentuk Pill */
+/* General Button Style */
 button {
   width: 100%;
-  padding: 14px;
+  padding: 12px 18px;
   background-color: var(--primary-btn);
   color: #fff;
   font-family: 'Space Mono', monospace;
   font-weight: 700;
-  font-size: 1.1rem;
+  font-size: 1rem;
   text-transform: uppercase;
   border: 2px solid var(--border-color);
   border-radius: 50px;
   cursor: pointer;
   transition: all 0.2s ease;
   box-shadow: 4px 4px 0px var(--border-color);
-  margin-top: 10px;
 }
 
 button:hover {
@@ -106,15 +100,321 @@ button:hover {
   box-shadow: 2px 2px 0px var(--border-color);
 }
 
-button:active {
-  transform: translate(4px, 4px);
-  box-shadow: 0px 0px 0px var(--border-color);
-}
-
-/* Error Message */
 #errorMsg {
   margin-top: 15px;
   font-size: 0.8rem;
   font-weight: bold;
   color: #D75520 !important;
+}
+
+/* Application Layout */
+.app-container {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* Responsive Header (Logout - Welcome - Keranjang) */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: var(--bg-color); /* Agar konten di bawahnya tidak menembus transparan saat di-scroll */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 3px solid var(--border-color);
+  padding-top: 15px;
+  padding-bottom: 15px;
+  margin-bottom: 25px;
+  width: 100%;
+  gap: 15px;
+}
+
+#logoutBtn.nav-btn,
+.cart-btn {
+  width: auto;
+  padding: 10px 20px;
+  margin-top: 0;
+  font-size: 0.85rem;
+  white-space: nowrap;
+}
+
+.welcome-text {
+  font-family: 'Fraunces', serif;
+  font-size: 1.6rem;
+  margin: 0;
+  text-align: center;
+  color: var(--text-dark);
+  flex: 1;
+}
+
+.badge {
+  background-color: var(--text-dark);
+  color: #fff;
+  border-radius: 50%;
+  padding: 2px 8px;
+  font-size: 0.8rem;
+}
+
+/* Controls Section (Search, Filter, Sort) */
+.controls-section {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+/* Product Cards Grid */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.product-card {
+  position: relative;
+  background: var(--input-bg);
+  border: 3px solid var(--border-color);
+  border-radius: 16px;
+  padding: 15px;
+  box-shadow: 5px 5px 0px var(--border-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.discount-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-color: var(--primary-btn);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 8px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  border: 1px solid var(--border-color);
+}
+
+.product-img {
+  width: 100%;
+  height: 160px;
+  object-fit: contain;
+  border-bottom: 2px solid var(--border-color);
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+
+.product-category {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  background: #E8E2CE;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+.product-price {
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: var(--primary-btn-hover);
+  margin: 8px 0;
+}
+
+/* Cart Section */
+.cart-section {
+  background: var(--input-bg);
+  border: 3px solid var(--border-color);
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 25px;
+  box-shadow: 6px 6px 0px var(--border-color);
+}
+
+.cart-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px dashed var(--border-color);
+  padding: 10px 0;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.cart-item-img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.cart-item-info {
+  flex: 1;
+  min-width: 120px;
+}
+
+.cart-item-actions {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.cart-item-actions button {
+  width: auto;
+  padding: 4px 10px;
+  font-size: 0.8rem;
+}
+
+.danger-btn {
+  background-color: #d9534f !important;
+}
+
+/* Load More Container */
+.load-more-container {
+  text-align: center;
+  margin: 30px 0;
+}
+
+.load-more-container button {
+  width: auto;
+  padding: 12px 30px;
+}
+
+/* Modal Styles */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 15px;
+}
+
+.modal-content {
+  background: var(--bg-color);
+  border: 3px solid var(--border-color);
+  border-radius: 20px;
+  padding: 25px;
+  width: 100%;
+  max-width: 600px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 8px 8px 0px var(--border-color);
+  position: relative;
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 1.8rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.modal-detail {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.modal-detail img {
+  width: 180px;
+  height: 180px;
+  object-fit: contain;
+  border: 2px solid var(--border-color);
+  border-radius: 12px;
+  background: white;
+}
+
+.error-box {
+  background-color: #f8d7da;
+  color: #721c24;
+  padding: 15px;
+  border: 2px solid #f5c6cb;
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* ==========================================
+   RESPONSIVE DESIGN (MEDIA QUERIES)
+   ========================================== */
+
+/* Tablet & HP Landscape (Max-width: 768px) */
+@media (max-width: 768px) {
+  body {
+    padding: 12px;
+  }
+
+  header {
+    flex-wrap: wrap;
+  }
+
+
+  .welcome-text {
+    order: -1;
+    width: 100%;
+    flex: none;
+    margin-bottom: 10px;
+    font-size: 1.4rem;
+  }
+
+  #logoutBtn.nav-btn,
+  .cart-btn {
+    font-size: 0.8rem;
+    padding: 8px 14px;
+  }
+
+  .controls-section {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .product-grid {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 15px;
+  }
+
+  .modal-detail {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .modal-detail img {
+    width: 140px;
+    height: 140px;
+  }
+}
+
+/* HP Portrait / Layar Kecil (Max-width: 480px) */
+@media (max-width: 480px) {
+  .product-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .login-container {
+    padding: 25px 18px;
+  }
+
+  .cart-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .cart-item-actions {
+    width: 100%;
+    justify-content: space-between;
+    margin-top: 5px;
+  }
 }
