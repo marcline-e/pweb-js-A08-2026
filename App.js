@@ -151,7 +151,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
     }
 
-    // Render & Array Slicing
+    // Render & Array Slicing -- Tejan
     function renderProducts(processedProducts) {
         if (processedProducts.length === 0) {
             productList.innerHTML = '<p class="no-data">Tidak ada produk yang cocok.</p>';
@@ -194,7 +194,7 @@ document.addEventListener('DOMContentLoaded', () => {
         renderProducts(processed);
     }
 
-    // Event Delegation untuk Modal & Keranjang
+    // Event Delegation untuk Modal & Keranjang -- Tejan
     productList.addEventListener('click', (e) => {
         const target = e.target;
         const card = target.closest('.product-card');
@@ -260,7 +260,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Fetch Data API
+    // Fetch Data API -- Tejan
     async function fetchProducts() {
         try {
             productList.innerHTML = '<p>Memuat katalog produk...</p>';
